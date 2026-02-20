@@ -20,6 +20,11 @@ import java.util.Optional;
 @Transactional
 public class TaskServiceImpl implements TaskService {
 
+    /**
+     * Default implementation of `TaskService` using JPA repository.
+     * Handles filtering, mapping and business rules around tasks.
+     */
+
     private final TaskRepository repository;
 
     public TaskServiceImpl(TaskRepository repository) {
@@ -27,6 +32,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public Page<TaskDTO> list(String title, Boolean isCompleted, String dueBefore, String dueAfter, Pageable pageable) {
         Specification<Task> spec = (root, query, cb) -> cb.equal(root.get("deleted"), false);
 
@@ -50,12 +58,18 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public TaskDTO getById(Integer id) {
         Task t = repository.findById(id).filter(task -> !task.isDeleted()).orElseThrow(() -> new NotFoundException("Task not found"));
         return TaskMapper.toDto(t);
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public TaskDTO create(TaskDTO dto) {
         Task t = TaskMapper.toEntity(dto);
         t.setDeleted(false);
@@ -64,6 +78,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public TaskDTO update(Integer id, TaskDTO dto) {
         Task existing = repository.findById(id).filter(task -> !task.isDeleted()).orElseThrow(() -> new NotFoundException("Task not found"));
         if (dto.getTitle() != null) existing.setTitle(dto.getTitle());
@@ -75,6 +92,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public void softDelete(Integer id) {
         Task existing = repository.findById(id).orElseThrow(() -> new NotFoundException("Task not found"));
         existing.setDeleted(true);
@@ -82,6 +102,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public TaskDTO toggleComplete(Integer id) {
         Task existing = repository.findById(id).filter(task -> !task.isDeleted()).orElseThrow(() -> new NotFoundException("Task not found"));
         existing.setCompleted(!existing.isCompleted());

@@ -7,6 +7,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TaskManagementApplication {
 
 	public static void main(String[] args) {
+		/**
+		 * Entry point for the Task Management Spring Boot application.
+		 * Starts the embedded server and initializes the Spring context.
+		 *
+		 * @param args command-line arguments
+		 */
 		SpringApplication.run(TaskManagementApplication.class, args);
 	}
 

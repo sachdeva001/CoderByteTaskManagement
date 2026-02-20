@@ -6,7 +6,14 @@ import org.joda.time.DateTime;
 
 public class TaskMapper {
 
+    /**
+     * Utility class for converting between `Task` entities and `TaskDTO` objects.
+     */
+
     public static TaskDTO toDto(Task task) {
+        /**
+         * Convert `Task` entity to `TaskDTO`.
+         */
         if (task == null) return null;
         TaskDTO dto = new TaskDTO();
         dto.setId(task.getId());
@@ -18,6 +25,10 @@ public class TaskMapper {
     }
 
     public static Task toEntity(TaskDTO dto) {
+        /**
+         * Convert `TaskDTO` to `Task` entity. Date parsing is performed if
+         * `dueDate` is present.
+         */
         if (dto == null) return null;
         Task t = new Task();
         t.setId(dto.getId());

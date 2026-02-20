@@ -3,6 +3,11 @@ package com.coderbyte.demo.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+/**
+ * Data Transfer Object representing a task payload exchanged via the API.
+ * Fields are intentionally simple (no JPA annotations) and use ISO datetime
+ * strings for the `dueDate` property.
+ */
 public class TaskDTO {
 
     private Integer id;

@@ -5,6 +5,10 @@ import org.joda.time.DateTime;
 
 @Entity
 @Table(name = "tasks")
+/**
+ * JPA entity representing a task stored in the `tasks` table.
+ * Contains fields for title, description, due date and soft-delete flag.
+ */
 public class Task {
 
     @Id
